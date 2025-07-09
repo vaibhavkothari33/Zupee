@@ -1,9 +1,12 @@
 import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
 import React from 'react'
-import { Slot } from 'expo-router'
+import { Redirect, Slot } from 'expo-router'
 import { images } from '@/constants'
+import useAuthStore from '@/store/auth.store'
 
-const _layout = () => {
+const AuthLayout = () => {
+      const { isAuthenticated } = useAuthStore();
+    if (isAuthenticated) return <Redirect href="/" />;
     const screenHeight = Dimensions.get("window").height;
     return (
         <KeyboardAvoidingView
@@ -37,4 +40,4 @@ const _layout = () => {
         </KeyboardAvoidingView>
     )
 }
-export default _layout
+export default AuthLayout;

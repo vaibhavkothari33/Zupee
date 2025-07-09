@@ -4,6 +4,7 @@ import { signIn } from '@/lib/appwrite'
 import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
 import { Alert, Text, View } from 'react-native'
+import * as Sentry from '@sentry/react-native'
 const SignIn = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [form, setForm] = useState({ email: "", password: "" });
@@ -23,6 +24,7 @@ const SignIn = () => {
             router.replace("/");
         }
         catch (error: any) {
+            Sentry.captureEvent(error)
             Alert.alert("Error", error.message)
         }
         finally {
@@ -57,7 +59,7 @@ const SignIn = () => {
                     Sign Up
                 </Link>
             </View>
-        </View>
+          </View>
     )
 }
 
