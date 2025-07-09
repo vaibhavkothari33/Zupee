@@ -46,13 +46,12 @@ export default function Index() {
               ListHeaderComponent={() => (
                   <View className="flex-between flex-row w-full my-5">
                       <View className="flex-start">
-                          <Text className="small-bold text-primary">DELIVER TO</Text>
+                          <Text className="text-primary">DELIVER TO</Text>
                           <TouchableOpacity className="flex-center flex-row gap-x-1 mt-0.5">
-                              <Text className="paragraph-bold text-dark-100">Bennett, Noida</Text>
+                              <Text className=" text-dark-100">Bennett, Noida</Text>
                               <Image source={images.arrowDown} className="size-3" resizeMode="contain" />
                           </TouchableOpacity>
                       </View>
-
                       <CartButton />
                   </View>
               )}

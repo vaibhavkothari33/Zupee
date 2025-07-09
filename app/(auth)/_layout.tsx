@@ -1,32 +1,40 @@
-import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native'
+import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native'
 import React from 'react'
 import { Slot } from 'expo-router'
 import { images } from '@/constants'
-import Custominput from '@/components/Custominput'
-import Custombutton from '@/components/Custombutton'
 
 const _layout = () => {
+    const screenHeight = Dimensions.get("window").height;
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
-            <ScrollView className='bg-white h-full' keyboardShouldPersistTaps="handled">
-                <View className='w-full relative' style={{ height: Dimensions.get("screen").height / 2.25 }}>
-                    <ImageBackground source={images.loginGraphic} className='size-full rounded-b-lg' resizeMode='stretch' />
-                    <Image source={images.logo} className='self-center size-48 absolute -bottom-16 z-10' />
-
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+        >
+            <ScrollView
+                className='bg-white flex-1'
+                keyboardShouldPersistTaps="handled"
+                contentContainerStyle={{ flexGrow: 1 }}
+                showsVerticalScrollIndicator={false}
+            >
+                <View className='w-full relative' style={{ height: screenHeight / 2.25 }}>
+                    <ImageBackground
+                        source={images.loginGraphic}
+                        className='size-full rounded-b-lg'
+                        resizeMode='stretch'
+                    />
+                    <Image
+                        source={images.logo}
+                        className='self-center size-48 absolute -bottom-16 z-10'
+                        resizeMode='contain'
+                    />
                 </View>
-                <Custominput 
-                    placeholder='Enter your email'
-                    value={''}
-                    onChangeText={(text) => {}}
-                    label='Email'
-                    keyboardType='email-address'
-                />
-                <Custombutton/>
 
+                {/* Container for the auth screens */}
+                <View className='flex-1 px-5'>
+                    <Slot />
+                </View>
             </ScrollView>
-            <Slot />
         </KeyboardAvoidingView>
     )
 }
-
 export default _layout
